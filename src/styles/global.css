@@ -1,0 +1,32 @@
+:root {
+    --sidebarWidth: 250px;
+
+    --borderRadius: 25px;
+
+    /* Color pallet */
+    --baseColor: #2d325c;
+    --bgColor: #1c213f;
+    --infoColor: #596bd1;
+    --accentColor: #e75ea6;
+
+
+    --mainTextColor: #f1f6ff;
+    --secondaryTextColor: #a3b0d2;
+
+    --green: #82CA9DFF;
+    --red: #ff7676;
+    --purple: #8884d8;
+}
+
+html{
+    background-color: var(--bgColor);
+}
+
+body{
+    font-family: 'Play', sans-serif;
+    font-weight: bold;
+}
+
+.chart-axis{
+    color: var(--secondaryTextColor);
+}

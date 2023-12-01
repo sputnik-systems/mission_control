@@ -1,0 +1,3387 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+"The @accessLevel directive is used within the type system definition language to protect some function."
+directive @accessLevel(level: Level!) on OBJECT | FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+"Deprecated: Will remove in future"
+interface Error {
+    code: Int!
+    message: String!
+    path: [String!]!
+}
+
+"Deprecated: Will remove in future"
+interface MutationResult {
+    node: Node!
+    notice: String
+    success: Boolean!
+}
+
+"Deprecated: Will remove in future"
+interface Node {
+    nodeID: NodeID!
+}
+
+"Deprecated: Will remove in future"
+interface QueryResult {
+    errors: [UserError!]
+    node: Node!
+    notice: String
+    success: Boolean!
+}
+
+"Represents an add intercom to cluster mutation payload."
+type AddIntercomToClusterPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Deprecated: Will remove in future"
+type Agent {
+    id: String
+    key: String
+    model: String
+    onvifProfile: String
+    password: Password
+    pin: PIN
+    salt: Salt
+    serial: AgentSerial
+    streampointURL: String
+}
+
+"Represents a agent info struct."
+type AgentInfo {
+    "Agent ID."
+    agentID: String
+    "Agent key."
+    agentKey: String
+    "Agent model."
+    agentModel: String
+    "Agent salt."
+    agentSalt: Salt
+    "Agent serial."
+    agentSerial: AgentSerial
+}
+
+"Deprecated: Will remove in future"
+type AnalogSettings {
+    alias: Int
+    blocked: Boolean!
+    thresholdCall: Float
+    thresholdDoor: Float
+}
+
+"Represents a Intercom backup model."
+type Backup {
+    "Backup ID."
+    backupID: String!
+    "Backup creation date."
+    date: DateTime!
+    "Backup description."
+    description: String
+}
+
+"Represents a Intercom BLE keys connection model."
+type BleKeysConnection {
+    "BLE keys."
+    edges: [BleKey!]!
+    "Total count of ble keys."
+    totalCount: Int!
+}
+
+"Represents a ble key mutations payload."
+type BleKeysPayload {
+    "Intercom information."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Call config."
+type CallConfig {
+    "TimeoutFlatCall."
+    flatCallTimeTimeout: Millisecond!
+    "TimeoutFlatSpeak."
+    flatDialingTimeTimeout: Millisecond!
+    "Is SIP blocked on intercom?"
+    generalSipBlocked: Boolean!
+    "Optional button credentials."
+    optionalButton: OptionalButtonConfig!
+    "SIP credentials."
+    sipAccount: SipAccountConfig!
+}
+
+"""
+
+Output type for Cameras info
+
+Deprecated: Will remove in future
+"""
+type Camera implements Node {
+    agent: Agent
+    dvrDepth: Int
+    intercom: Intercom
+    nodeID: NodeID!
+    onvifURL: String
+    permanentStream: Status @deprecated(reason: "permanentStream is depreacted. Use permanentStreamBool instead.")
+    permanentStreamBool: Boolean
+    secretKey: String
+    streamInfo: StreamInfo
+    streamURL: String
+    substreamURL: String
+    thumbnails: Status @deprecated(reason: "thumbnails is depreacted. Use thumbnailsBool instead.")
+    thumbnailsBool: Boolean
+    thumbnailsURL: String
+    uuid: UUID!
+}
+
+"Represents a Camera audio shadow."
+type CameraAudioConfig {
+    amplifier: Boolean!
+    bitrate: Int!
+    encodeType: String!
+    inputVolume: Int!
+    outputVolume: Int!
+    sampleRate: Int!
+    status: Boolean!
+}
+
+"Represents a Camera config."
+type CameraConfig {
+    "Camera audio settings."
+    audio: CameraAudioConfig!
+    "Camera image settings."
+    image: CameraImageConfig!
+    "Camera ircut settings."
+    ircut: CameraIrcutConfig!
+    "Camera motion detect settings."
+    motionDetect: CameraMotionDetectConfig!
+    "Camera network settings."
+    network: CameraNetworkConfig!
+    "Camera NTP settings."
+    ntp: CameraNtpConfig!
+    "Camera osd settings."
+    osd: CameraOsdConfig!
+    "Camera service settings."
+    service: CameraServiceConfig!
+    "Camera snapshots settings."
+    snapshots: CameraSnapshotsConfig!
+    "Camera users settings."
+    users: [CameraUserConfig!]!
+    """
+
+    Camera config version. Used for diff between `camera config` and `camera config_shadow`.
+    Example: `e7cae67bbf8d30a7233259846ece10`.
+    """
+    version: String!
+    "Camera video settings."
+    videoEncode: CameraVideoEncodeConfig!
+}
+
+"Represents a Camera image shadow."
+type CameraImageConfig {
+    blc: Int!
+    brightness: Int!
+    contrast: Int!
+    hlc: Int!
+    nr2d: Int!
+    nr3d: Int!
+    powerFreq: Int!
+    saturation: Int!
+    sharpness: Int!
+    wdrEnabled: Boolean!
+    wdrLevel: Int!
+}
+
+"Represents a Camera ircut shadow."
+type CameraIrcutConfig {
+    ledBrightness: Int!
+    lightSensitivity: Int!
+}
+
+"Represents a Camera motion detect config."
+type CameraMotionDetectConfig {
+    enable: Boolean!
+    enableHook: Boolean!
+    sensitivity: Int!
+}
+
+"Represents camera mutations output."
+type CameraMutationPayload {
+    "Camera object."
+    camera: CameraV2
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a Camera network config."
+type CameraNetworkConfig {
+    dhcp: Boolean!
+    gateway: IP
+    ip: IP
+    netmask: IP
+    primaryDns: IP
+    secondDns: IP
+}
+
+"Represents a Camera NTP config."
+type CameraNtpConfig {
+    ntpPort: Int!
+    ntpServer: String!
+    timezone: String!
+    updatePeriod: Int!
+}
+
+"Represents a Camera osd shadow."
+type CameraOsdConfig {
+    osdDownLeft: String!
+    osdUpLeft: String!
+    osdUpRight: String!
+    showWeek: Boolean!
+}
+
+"Represents a Camera service config."
+type CameraServiceConfig {
+    enableWeb: Boolean!
+    flussonicAgent: Boolean!
+    flussonicServer: String!
+    hikEnable: Boolean!
+    hikPort: Int!
+    onvifAuth: Boolean!
+    rmqURL: String!
+    rtspAuth: Boolean!
+    rtspEnable: Boolean!
+    rtspPort: Int!
+}
+
+"Represents a Camera snapshots shadow."
+type CameraSnapshotsConfig {
+    quality: Int!
+    status: Boolean!
+}
+
+"Represents a Camera user shadow."
+type CameraUserConfig {
+    access: Int!
+    password: String!
+    username: String!
+}
+
+"Represents a Camera struct."
+type CameraV2 {
+    "Agent info."
+    agent: AgentInfo
+    "Company uuid of Camera."
+    companyUUID: UUID!
+    "Camera config."
+    config: CameraConfig!
+    "Camera config shadow."
+    configShadow: CameraConfig!
+    "Archive depth."
+    dvrDepth: Int
+    "Camera firmware version."
+    fwVersion: Version
+    "Intercom camera."
+    intercom: IntercomV2
+    "Is camera activated?"
+    isActivated: Boolean
+    "Camera model."
+    model: String
+    "Is camera have permanent stream?"
+    permanentStream: Boolean
+    "Stream by server info."
+    serverStreamInfo: ServerStreamInfo
+    """
+
+    **PRIVATE FIELD**
+
+    Stream url.
+    """
+    streamURL: String
+    "Camera uuid (unique identifier)."
+    uuid: UUID!
+    "Is camera streaming video only?"
+    videoOnly: Boolean
+}
+
+"Represents a Camera video shadow."
+type CameraVideoEncodeConfig {
+    mainStream: CameraVideoStreamConfig!
+    subStream: CameraVideoStreamConfig!
+}
+
+"Represents a Camera video stream shadow."
+type CameraVideoStreamConfig {
+    bitrate: Int!
+    compression: String!
+    fps: Int!
+    frameInterval: Int!
+    rateType: String!
+    resolution: String!
+    status: Boolean!
+}
+
+"Represents info about intercom and its type in context of a cluster"
+type ClusterInfo {
+    "Intercom."
+    intercom: IntercomV2!
+    "Intercom type."
+    intercomType: IntercomType!
+}
+
+"Represents a cluster mutation payload."
+type ClusterPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents cluster prefix params."
+type ClusterPrefix {
+    "First flat."
+    firstFlat: Int!
+    "Last flat."
+    lastFlat: Int!
+    "Cluster prefix."
+    prefix: Int!
+    "Voice text."
+    voiceText: String!
+}
+
+"Deprecated: Will remove in future"
+type CommonMutationResult {
+    node: Node
+    notice: String
+    success: Boolean!
+}
+
+"Config for commutator setting."
+type CommutatorConfig {
+    "Commutator type."
+    commutatorType: CommutatorType!
+    "Setting line ADC values."
+    lineAdcValues: LineAdcValue!
+}
+
+"Represents a Intercom config struct."
+type Config {
+    """
+
+    **PRIVATE FIELD**
+
+    Firmware path at file server. Used for firmware update.
+    """
+    bootURL: String
+    "Intercom calls config"
+    calls: CallConfig!
+    "Config for commutator setting."
+    commutator: CommutatorConfig!
+    companyUUID: UUID! @deprecated(reason: "Used intercom.companyUUID instead")
+    description: String @deprecated(reason: "Used intercom.VoiceText instead")
+    "Config for the door open durations."
+    doorOpenDurations: DoorOpenDurations!
+    "External interface door control (0 or 1)."
+    externalInterfaceDoorCtrl: Int!
+    "Intercom flats config"
+    flats: FlatConfig!
+    "Is the intercom infrared status on."
+    infrared: Boolean!
+    "Intercom keys / digital codes config"
+    keys: KeysConfig!
+    "Is the intercom light status on."
+    light: Boolean!
+    "Lock no (normal open) nc (normal close) parameter (0, 1, 2, 3)."
+    lockNoNc: Int!
+    "Intercom network config"
+    network: NetworkConfig
+    "Info about server URL."
+    platformEndpoints: PlatformEndpoints
+    "Social informing settings - start/end time and sounds url."
+    socialInforming: UserSoundsBoundaries
+    "Social polling settings - start/end time and sounds url."
+    socialPolling: UserSoundsBoundaries
+    "Setting up sound processing by a neural network."
+    soundProcessingConfig: String!
+    "Sound volume config."
+    soundVolumes: SoundConfig!
+    "Standard sounds list."
+    standardSounds: StandardSounds!
+    """
+
+    Time zone setting.
+    Example: `"0"`, `"+1"`.
+    """
+    timeZone: String!
+    """
+
+    Config version. Used for diff between `config` and `shadow`.
+    Example: `e7cae67bbf8d30a7233259846ece10`.
+    """
+    version: String
+}
+
+"Represents an create intercom payload."
+type CreateIntercomPayload {
+    "Intercom object."
+    intercom: IntercomV2
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Deprecated: Will remove in future"
+type CustomError implements Error {
+    code: Int!
+    message: String!
+    path: [String!]!
+}
+
+"Represents a Intercom digital code model."
+type DigitalKey {
+    "Digital code exp time."
+    expTime: DateTime
+    "Digital code UUID."
+    uuid: UUID
+    "Digital code value."
+    value: DigitalKeyValue
+}
+
+"Represents a digital key output."
+type DigitalKeyPayload {
+    "Intercom information."
+    intercom: IntercomV2!
+    "Array of digital keys."
+    keys: [DigitalKey]
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a Intercom digital codes connection model."
+type DigitalKeysConnection {
+    "Digital codes edge."
+    edges: [DigitalKeysEdge!]!
+    "Total count of digital codes."
+    totalCount: Int!
+}
+
+"Represents a Intercom digital codes edge model."
+type DigitalKeysEdge {
+    "Cursor for pagination."
+    cursor: ID!
+    "Digital code description."
+    description: String
+    "Intercom digital code."
+    node: DigitalKey
+}
+
+"Config for the door open durations."
+type DoorOpenDurations {
+    "Bluetooth door open duration."
+    bluetooth: Second!
+    "Emergency door open duration, when the emergency informing is on."
+    emergency: Second!
+    "General door open duration."
+    general: Second!
+    "Social door open duration, when the social informing is on."
+    social: Second!
+}
+
+"Represents an emergency mutations payload."
+type EmergencyPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a event mutation payload."
+type EventMutationPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Deprecated: Will remove in future"
+type Flat {
+    analogSettings: AnalogSettings!
+    blocked: Boolean!
+    num: Int!
+    redirection: RedirectionStatus! @deprecated(reason: "redirection is deprecated. Use redirectionBool instead.")
+    redirectionBool: Boolean!
+    sipAccountContact: String
+    soundVol: Percent!
+}
+
+"Intercom general flat config."
+type FlatConfig {
+    "Default flat threshold call."
+    defaultThresholdCall: Float!
+    "Default flat threshold door."
+    defaultThresholdDoor: Float!
+    "First flat number."
+    firstFlat: Int!
+    "Flat offset."
+    flatOffset: Int
+    "Flat range."
+    flatRange: Int
+    flats(after: ID, limit: Int = 10): FlatsConnection! @deprecated(reason: "flats is deprecated. Use newFlats instead.")
+    "Last flat number."
+    lastFlat: Int!
+    "Flats list"
+    newFlats(after: ID, filter: FlatsFilter = ALL, limit: Int = 10): NewFlatsConnection!
+    "Flat config version. Used for diff between `config` and `shadow`."
+    version: String
+}
+
+"Represents a update intercom flats config payload."
+type FlatMutationPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Deprecated: Will remove in future"
+type FlatsConnection {
+    edges: [FlatsEdge!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+"Deprecated: Will remove in future"
+type FlatsEdge {
+    cursor: ID!
+    node: Flat
+}
+
+"Deprecated: Will remove in future"
+type Intercom implements Node {
+    IPmode: Boolean!
+    camera: Camera
+    children: [Intercom!]
+    "Текущее состояние процесса сбора ключей"
+    collectingKeysState: String
+    "Конфигурация и тень конфигурации домофона"
+    config: Config!
+    configShadow: Config!
+    "Статус активации домофона"
+    isActivated: ActivationStatus! @deprecated(reason: "isActivated is deprecated. Use isActivatedBool instead.")
+    isActivatedBool: Boolean!
+    "Текущий статус устройства"
+    isOnline: IsOnlineStatus! @deprecated(reason: "isOnline is deprecated. Use isOnlineBool instead.")
+    isOnlineBool: Boolean!
+    "Статус SIP регистрации"
+    isSipReg: IsSipRegStatus! @deprecated(reason: "isSipReg is deprecated. Use isSipRegBool instead.")
+    isSipRegBool: Boolean!
+    manufactureVersions: ManufactureVersions
+    "Номер материнской платы"
+    motherboardID: MotherboardID!
+    nodeID: NodeID!
+    "2 поля parents и children нужны для кластерного режима"
+    parents: [Intercom!]
+    "key - секретный ключ для авторизации домофона на gateway"
+    secretKey: String!
+    "Короткий серийный номер домофона"
+    serialNumber: SerialNumber! @deprecated(reason: "Use `motherboardID`.")
+    uuid: UUID! @deprecated(reason: "Use `nodeID`.")
+    voiceText: String!
+}
+
+"Represents a save intercom backup mutation payload."
+type IntercomBackupPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a intercom keys batch output."
+type IntercomKeysBatchPayload {
+    errors: [CustomError!]
+    "Intercom information."
+    intercom: IntercomV2
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a intercom keys output."
+type IntercomKeysPayload {
+    "Intercom information."
+    intercom: IntercomV2
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a Intercom struct."
+type IntercomV2 {
+    "Intercom ip mode."
+    IPMode: Boolean! @deprecated(reason: "Use `ipMode` instead.")
+    "Intercom backup list."
+    backups: [Backup]
+    "Intercom camera info."
+    camera: CameraV2
+    "Intercom children."
+    children: [IntercomV2!]
+    "List of devices that belong to the same cluster"
+    clusterInfo: [ClusterInfo]
+    "Cluster prefix list."
+    clusterPrefixes: [ClusterPrefix!]
+    "Intercom collecting key state."
+    collectingKeysState: String
+    "Company uuid of Intercom."
+    companyUUID: UUID!
+    "Intercom configuration."
+    config: Config!
+    "Intercom shadow-configuration."
+    configShadow: Config!
+    "Device name."
+    deviceName: DeviceName!
+    "Intercom ip mode."
+    ipMode: Boolean!
+    "Intercom activation status."
+    isActivated: Boolean!
+    "Intercom online status."
+    isOnline: Boolean!
+    "Intercom sip info."
+    isSipReg: Boolean!
+    "Version of Intercom sw/hw."
+    manufactureVersions: ManufactureVersions
+    "Short serial number of Intercom."
+    motherboardID: MotherboardID!
+    "Intercom parents."
+    parents: [IntercomV2!]
+    "Key for intercom authorization on gateway"
+    secretKey: String!
+    "Old short serial number of Intercom."
+    serialNumber: SerialNumber! @deprecated(reason: "Use `motherboardID` instead.")
+    "Intercom uuid (unique identifier)."
+    uuid: UUID!
+    "Intercom voice text param."
+    voiceText: String!
+}
+
+"Represents a Intercom key binary model."
+type KeyBinary {
+    "Key binary."
+    key: Binary!
+    "Key binary size."
+    size: Int!
+}
+
+"Represents a Intercom key binary connection model."
+type KeysBinaryConnection {
+    "Binary keys edge."
+    edges: [KeysBinaryEdge!]!
+    "Total count of keys."
+    totalCount: Int!
+}
+
+"Represents a Intercom key binary edge model."
+type KeysBinaryEdge {
+    "Cursor for pagination."
+    cursor: ID!
+    "Intercom key in binary represent."
+    node: KeyBinary
+}
+
+"Intercom keys config."
+type KeysConfig {
+    "Ble keys list."
+    bleKeys: BleKeysConnection
+    collectingFlatsKeys: Boolean! @deprecated(reason: "collectingFlatsKeys is deprecated. Use collectingKeyStatus instead.")
+    collectingKey: Status! @deprecated(reason: "collectingKey is deprecated. Use collectingKeysBool instead.")
+    "Collecting keys status."
+    collectingKeyStatus: CollectingKeyStatus!
+    collectingKeysBool: Boolean! @deprecated(reason: "collectingKeysBool is deprecated. Use collectingKeyStatus instead.")
+    "Digital keys list."
+    digitalKeys: DigitalKeysConnection
+    "Digital codes version. Used for diff between `config` and `shadow`."
+    digitalKeysVersion: String
+    "Engineer keys list."
+    engineerKeys: [EngineerKey!]!
+    "Intercom keys list."
+    keys: KeysConnection
+    """
+
+    **PRIVATE FIELD**
+
+    Intercom Keys binary list.
+    """
+    keysBinary: KeysBinaryConnection
+    "Intercom keys version. Used for diff between `config` and `shadow`."
+    keysVersion: String
+    "Secure keys config."
+    secureKeys: SecureKeysConfig
+    securedKeys: SecuredKeysConfig @deprecated(reason: "securedKeys is deprecated. Use secureKeys instead.")
+}
+
+"Represents a Intercom key connection model."
+type KeysConnection {
+    "Keys edges (List of keys.)."
+    edges: [KeysEdge!]!
+    "Pagination info."
+    pageInfo: PageInfo!
+    "Total count of keys."
+    totalCount: Int!
+}
+
+"Represents a Intercom key edge model."
+type KeysEdge {
+    "Cursor for pagination."
+    cursor: ID!
+    "Description of key."
+    description: String
+    "Key."
+    node: Key
+}
+
+"Setting line ADC values."
+type LineAdcValue {
+    "Line 1 ADC value."
+    one: Int!
+    "Line 3 ADC value."
+    three: Int!
+    "Line 2 ADC value."
+    two: Int!
+}
+
+"Represents intercom flat line test mutations payload."
+type LineTestPayload {
+    "Data logs"
+    data: DataLogs
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a link camera to company mutation payload."
+type LinkCameraToCompanyPayload {
+    "Camera."
+    camera: CameraV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a link camera to intercom mutation payload."
+type LinkCameraToIntercomPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a link intercom to company mutation payload."
+type LinkIntercomToCompanyPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents nodes of Intercom."
+type ListOutput {
+    "Nodes of Intercom."
+    nodes: [IntercomV2]!
+    "Total count of Intercoms."
+    totalCount: Int!
+}
+
+"Intercom logs"
+type Logs {
+    "Context: example `intercom`."
+    context: String
+    "Event data."
+    data: DataLogs
+    "DateTime in milliseconds: example `2006-01-02T15:04:05.99-07:00`."
+    dateTime: DateTimeMillisecond
+    "Intercom uuid: example `00000000-0000-0000-0000-000000000000`."
+    deviceID: UUID
+    "Event: example `intercom.open_door`."
+    event: String
+    "Event code: example `0`."
+    eventCode: Int
+}
+
+"Represents a manufacture versions of Intercom."
+type ManufactureVersions {
+    "Bluetooth version."
+    bleVersion: Version
+    "Hardware version."
+    hwVersion: Version
+    "Software version."
+    swVersion: Version
+}
+
+type Mutation {
+    "Add ble keys."
+    addBleKeys(input: AddBleKeysInput!): BleKeysPayload!
+    """
+
+    Add cluster prefix to intercom by gate intercom uuid and prefix.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/nastroika-klastera/addclusterprefixestointercom)**
+    """
+    addClusterPrefixesToIntercom(input: AddClusterPrefixesToIntercomInput!): ClusterPayload!
+    """
+
+    Add virtual flat config .
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-kvartirami/addflat)**
+    """
+    addFlat(input: IntercomFlatInput!): FlatMutationPayload!
+    """
+
+    Add virtual flats config .
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-kvartirami/addflats)**
+    """
+    addFlats(input: IntercomFlatsInput!): FlatMutationPayload!
+    """
+
+    Add intercom keys.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/klyuchi/addintercomkeys)**
+    """
+    addIntercomKeys(input: AddIntercomKeysInput!): IntercomKeysPayload!
+    "Add intercom keys batch."
+    addIntercomKeysBatch(input: AddIntercomKeysBatchInput!): [IntercomKeysBatchPayload!]!
+    """
+
+    Add intercom to cluster by gate intercom uuid and entrances intercom data.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/nastroika-klastera/addintercomtocluster)**
+    """
+    addIntercomToCluster(input: AddIntercomToClusterInput!): AddIntercomToClusterPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Create camera in api.
+    """
+    createCamera(input: CreateCameraInput!): CameraMutationPayload
+    "Creates camera user."
+    createCameraUser(input: CreateCameraUserInput!): UpdateCameraConfigPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Create custom camera for company in api.
+    """
+    createCustomCamera(input: CreateCustomCameraInput!): CameraMutationPayload!
+    """
+
+    Create a new digital keys.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/kody-dostupa/createdigitalkeys)**
+    """
+    createDigitalKeys(input: CreateDigitalKeysInput!): DigitalKeyPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Create genesis token for company.
+    """
+    createGenesisToken(input: CreateGenesisTokenInput!): TokenPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Creates an intercom.
+    """
+    createIntercom(input: CreateIntercomInput!): CreateIntercomPayload!
+    """
+
+    Create a new token.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-tokenami/createtoken)**
+    """
+    createToken(input: CreateTokenInput!): TokenPayload!
+    """
+
+    Create a new policy for token.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-tokenami/createtokenpolicy)**
+    """
+    createTokenPolicy(input: CreateTokenPolicyInput!): PolicyPayload!
+    """
+
+    Create a new webhook.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-webhooks/createwebhook)**
+    """
+    createWebhook(input: CreateWebhookInput!): WebhookPayload!
+    "Delete all ble keys by intercomID."
+    deleteAllBleKeys(input: DeleteAllBleKeysInput!): BleKeysPayload!
+    """
+
+    Delete all digital key.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/kody-dostupa/deletealldigitalkeys)**
+    """
+    deleteAllDigitalKeys(input: DeleteAllDigitalKeysInput!): DigitalKeyPayload!
+    """
+
+    Delete all virtual flats.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-kvartirami/deleteallflats)**
+    """
+    deleteAllFlats(input: IntercomFilter!): FlatMutationPayload
+    """
+
+    Delete all intercom keys.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/klyuchi/deleteallintercomkeys)**
+    """
+    deleteAllIntercomKeys(input: DeleteAllIntercomKeysInput!): IntercomKeysPayload!
+    "Delete ble keys."
+    deleteBleKeys(input: DeleteBleKeysInput!): BleKeysPayload!
+    "Deletes camera user."
+    deleteCameraUser(input: DeleteCameraUserInput!): UpdateCameraConfigPayload!
+    """
+
+    Delete digital key.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/kody-dostupa/deletedigitalkey)**
+    """
+    deleteDigitalKey(input: DeleteDigitalKeyInput!): DigitalKeyPayload!
+    """
+
+    Delete virtual flat.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-kvartirami/deleteflat)**
+    """
+    deleteFlat(input: FlatNumberInput!): FlatMutationPayload!
+    """
+
+    Delete intercom backup.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-bekapami/deleteintercombackup)**
+    """
+    deleteIntercomBackup(input: DeleteIntercomBackupInput!): IntercomBackupPayload!
+    """
+
+    Delete intercom keys.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/klyuchi/deleteintercomkeys)**
+    """
+    deleteIntercomKeys(input: DeleteIntercomKeysInput!): IntercomKeysPayload!
+    "Delete intercom keys batch."
+    deleteIntercomKeysBatch(input: DeleteIntercomKeysBatchInput!): [IntercomKeysBatchPayload!]!
+    """
+
+    Delete token policy.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-tokenami/deletepolicies)**
+    """
+    deletePolicies(input: DeletePoliciesInput!): PolicyPayload!
+    """
+
+    Delete token.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-tokenami/deletetoken)**
+    """
+    deleteToken(input: DeleteTokenInput!): TokenPayload!
+    """
+
+    Delete webhook.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-webhooks/deletewebhook)**
+    """
+    deleteWebhook(input: DeleteWebhookInput!): WebhookPayload!
+    """
+
+    Edit webhook.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-webhooks/editwebhook)**
+    """
+    editWebhook(input: EditWebhookInput): WebhookPayload!
+    """
+
+    Make line test by intercom uuid and flat num.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/linetest)**
+    """
+    lineTest(input: LineTestInput!): LineTestPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Link camera to company by cameraID and company uuid.
+    """
+    linkCameraToCompany(input: LinkCameraToCompanyInput!): LinkCameraToCompanyPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Link camera to intercom by camera agent serial and intercom uuid.
+    """
+    linkCameraToIntercom(input: LinkCameraToIntercomInput!): LinkCameraToIntercomPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Link intercom to company by intercom uuid and company uuid.
+    """
+    linkIntercomToCompany(input: LinkIntercomToCompanyInput!): LinkIntercomToCompanyPayload!
+    """
+
+    Open door by intercom uuid for 'duration' time.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/opendoor)**
+    """
+    openDoor(input: OpenDoorInput!): OpenDoorPayload!
+    """
+
+    Open second door by intercom uuid for 'duration' time.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/openseconddoor)**
+    """
+    openSecondDoor(input: OpenDoorInput!): OpenDoorPayload!
+    """
+
+    Reboot camera by camera uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/perezagruzka-ustroistv/rebootcamera)**
+    """
+    rebootCamera(input: RebootCameraInput!): RebootCameraPayload!
+    """
+
+    Reboot cluster by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/perezagruzka-ustroistv/rebootcluster)**
+    """
+    rebootCluster(input: RebootClusterInput!): RebootClusterPayload!
+    """
+
+    Reboot intercom by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/perezagruzka-ustroistv/rebootintercom)**
+    """
+    rebootIntercom(input: RebootIntercomInput!): RebootIntercomPayload!
+    "Reboot camera by intercom uuid."
+    rebootIntercomCamera(input: RebootIntercomInput!): RebootCameraPayload!
+    """
+
+    Refresh a token jwt (save token uuid).
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-tokenami/refreshtoken)**
+    """
+    refreshToken(input: RefreshTokenInput!): TokenPayload!
+    """
+
+    Remove all cluster prefix by gate intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/nastroika-klastera/removeallclusterprefix)**
+    """
+    removeAllClusterPrefix(input: IntercomFilter!): ClusterPayload!
+    """
+
+    Remove cluster prefix by gate intercom uuid and prefix.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/nastroika-klastera/removeclusterprefix)**
+    """
+    removeClusterPrefix(input: RemoveClusterPrefixInput!): ClusterPayload!
+    """
+
+    Remove intercom from cluster by gate intercom uuid and entrances intercom data.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/nastroika-klastera/removeintercomfromcluster)**
+    """
+    removeIntercomFromCluster(input: RemoveIntercomFromClusterInput!): RemoveIntercomFromClusterPayload!
+    "Deprecated: Will remove in future"
+    resetCamera(nodeID: NodeID!): ResetInfoOutput! @deprecated(reason: "resetCamera is deprecated. Use rebootIntercomCamera instead")
+    "Deprecated: Will remove in future"
+    resetCameraByCameraUUID(uuid: UUID!): ResetInfoOutput! @deprecated(reason: "resetCameraByCameraUUID is deprecated. Use rebootCamera instead")
+    """
+
+    Reset flat to standard parameters.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-kvartirami/resetflat)**
+    """
+    resetFlat(input: FlatNumberInput!): FlatMutationPayload!
+    "Deprecated: Will remove in future"
+    resetIntercom(nodeID: NodeID!): ResetInfoOutput! @deprecated(reason: "resetIntercom is deprecated. Use rebootIntercom instead")
+    "Restore default config (whole) by camera uuid or camera serial."
+    restoreDefaultCameraConfig(input: CameraFilter!): RestoreDefaultCameraConfigPayload!
+    "Restore default config (whole) by intercom uuid."
+    restoreDefaultIntercomConfig(input: RestoreConfigInput!): RestoreDefaultIntercomConfigPayload! @deprecated(reason: "Use restoreDefaultIntercomConfigV2 instead.")
+    """
+
+    Restore default config (whole) by intercom uuid with filters.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/sbros-nastroek/restoredefaultintercomconfigv2)**
+    """
+    restoreDefaultIntercomConfigV2(input: RestoreDefaultIntercomConfigInput!): RestoreDefaultIntercomConfigPayload!
+    """
+
+    Restore default network config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/sbros-nastroek/restoredefaultintercomnetworkconfig)**
+    """
+    restoreDefaultIntercomNetworkConfig(input: RestoreConfigInput!): RestoreDefaultIntercomConfigPayload!
+    """
+
+    Restore default sounds by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/sbros-nastroek/restoredefaultintercomsounds)**
+    """
+    restoreDefaultIntercomSounds(input: RestoreConfigInput!): RestoreDefaultIntercomConfigPayload!
+    """
+
+    Restore intercom backup.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-bekapami/restoreintercombackup)**
+    """
+    restoreIntercomBackup(input: RestoreIntercomBackupInput!): IntercomBackupPayload!
+    """
+
+    Save intercom backup for future restore.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-bekapami/saveintercombackup)**
+    """
+    saveIntercomBackup(input: SaveIntercomBackupInput!): IntercomBackupPayload!
+    """
+
+    Send a key_count event for getting keys count of Intercom.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/otpravka-sobytii-na-panel/sendkeycountevent)**
+    """
+    sendKeyCountEvent(input: IntercomFilter!): EventMutationPayload!
+    """
+
+    Send a net_info event for getting network setting of Intercom.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/otpravka-sobytii-na-panel/sendnetinfoevent)**
+    """
+    sendNetInfoEvent(input: IntercomFilter!): EventMutationPayload!
+    "Send a start_call event for starting call from Intercom."
+    sendStartCallEvent(input: StartCallInput!): EventMutationPayload!
+    """
+
+    Send a url_info event for getting urls info of Intercom.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/otpravka-sobytii-na-panel/sendurlinfoevent)**
+    """
+    sendURLInfoEvent(input: IntercomFilter!): EventMutationPayload!
+    """
+
+    Update intercom social informing intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/startemergency)**
+    """
+    startEmergency(input: EmergencyInput!): EmergencyPayload!
+    "Changes coordinate matrix line mode; enable/disable."
+    toggleIPMode(input: IntercomFilter!): ToggleIPModePayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Update intercom ble firmware.
+    """
+    updateBleFirmware(input: UpdateFirmwareInput!): UpdateFirmwarePayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Update Camera information.
+    """
+    updateCamera(input: UpdateCameraInput!): CameraMutationPayload!
+    "Updates camera audio config."
+    updateCameraAudioConfig(input: UpdateCameraAudioConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera image config."
+    updateCameraImageConfig(input: UpdateCameraImageConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera ircut config."
+    updateCameraIrcutConfig(input: UpdateCameraIrcutConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera motion detect config."
+    updateCameraMotionDetectConfig(input: UpdateCameraMotionDetectConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera network config."
+    updateCameraNetworkConfig(input: UpdateCameraNetworkConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera ntp config."
+    updateCameraNtpConfig(input: UpdateCameraNtpConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera osd config."
+    updateCameraOsdConfig(input: UpdateCameraOsdConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera service config params."
+    updateCameraServiceConfig(input: UpdateServiceCameraConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera snapshots config."
+    updateCameraSnapshotsConfig(input: UpdateCameraSnapshotsConfigInput!): UpdateCameraConfigPayload!
+    "Updates camera video config."
+    updateCameraVideoConfig(input: UpdateCameraVideoConfigInput!): UpdateCameraConfigPayload!
+    """
+
+    Update cluster prefix by gate intercom uuid and prefix
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/nastroika-klastera/updateclusterprefix)**
+    """
+    updateClusterPrefix(input: UpdateClusterPrefixInput!): ClusterPayload!
+    """
+
+    Change the description of the digital key.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/kody-dostupa/updatedigitalkey)**
+    """
+    updateDigitalKey(input: UpdateDigitalKeyInput!): DigitalKeyPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Update intercom firmware.
+    """
+    updateFirmware(input: UpdateFirmwareInput!): UpdateFirmwarePayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Update Intercom activation status.
+    """
+    updateIntercomActivationStatus(input: UpdateIntercomActivationStatusInput!): UpdateIntercomActivationStatusPayload!
+    """
+
+    Update intercom call config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomcallconfig)**
+    """
+    updateIntercomCallConfig(input: UpdateIntercomCallConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom commutator config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomcommutatorconfig)**
+    """
+    updateIntercomCommutatorConfig(input: UpdateIntercomCommutatorConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update external interface door control by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomexternalinterfacedoorctrl)**
+    """
+    updateIntercomExternalInterfaceDoorCtrl(input: UpdateIntercomExternalInterfaceDoorCtrlInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom flat config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-kvartirami/updateintercomflatconfig)**
+    """
+    updateIntercomFlatConfig(input: UpdateIntercomFlatConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom flats config .
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/rabota-s-kvartirami/updateintercomflats)**
+    """
+    updateIntercomFlats(input: IntercomFlatsInput!): FlatMutationPayload!
+    """
+
+    Update intercom interact config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercominteractconfig)**
+    """
+    updateIntercomInteractConfig(input: UpdateIntercomInteractConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom key.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/klyuchi/updateintercomkey)**
+    """
+    updateIntercomKey(input: UpdateIntercomKeyInput!): IntercomKeysPayload!
+    """
+
+    Update intercom lock no nc parameters by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomlocknoncparameters)**
+    """
+    updateIntercomLockNoNcParameters(input: UpdateIntercomLockNoNcParametersInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom network config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomnetworkconfig)**
+    """
+    updateIntercomNetworkConfig(input: UpdateIntercomNetworkConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom open door config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomopendoorconfig)**
+    """
+    updateIntercomOpenDoorConfig(input: UpdateIntercomOpenDoorConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom optional button parameters by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomoptionalbuttonparameters)**
+    """
+    updateIntercomOptionalButtonParameters(input: UpdateIntercomOptionalButtonParametersInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom secure keys config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomsecurekeysconfig)**
+    """
+    updateIntercomSecureKeysConfig(input: UpdateIntercomSecureKeysConfigInput!): UpdateIntercomConfigPayload!
+    "Update intercom secured keys config by intercom uuid."
+    updateIntercomSecuredKeysConfig(input: UpdateIntercomSecuredKeysConfigInput!): UpdateIntercomConfigPayload! @deprecated(reason: "updateIntercomSecuredKeysConfig is deprecated. Use updateIntercomSecureKeysConfig instead")
+    """
+
+    Update intercom sip parameters by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomsipparameters)**
+    """
+    updateIntercomSipParameters(input: UpdateIntercomSipParametersInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update intercom sound config by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomsoundconfig)**
+    """
+    updateIntercomSoundConfig(input: UpdateIntercomSoundConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    **PRIVATE MUTATION**
+
+    Update intercom sound processing config by intercom uuid.
+    """
+    updateIntercomSoundProcessingConfig(input: UpdateIntercomSoundProcessingConfigInput!): UpdateIntercomConfigPayload!
+    """
+
+    Updates the standard sounds of an intercom.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomstandardsounds)**
+    """
+    updateIntercomStandardSounds(input: UpdateIntercomStandardSoundsInput!): UpdateIntercomStandardSoundsPayload!
+    """
+
+    Update intercom time zone by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateintercomtimezone)**
+    """
+    updateIntercomTimeZone(input: UpdateIntercomTimeZoneInput!): UpdateIntercomConfigPayload!
+    """
+
+    Update platform endpoints by intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updateplatformendpoints)**
+    """
+    updatePlatformEndpoints(input: UpdatePlatformEndpointsInput!): UpdatePlatformEndpointsPayload!
+    """
+
+    Update intercom social informing intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updatesocialinforming)**
+    """
+    updateSocialInforming(input: UpdateSocialConfigInput!): UpdateSocialConfigPayload!
+    """
+
+    Update intercom social polling intercom uuid.
+
+    **[Documentation](https://docs.sputnik.systems/asgard-graphql-api-developer-portal/mutations/izmenenie-konfiga/updatesocialpolling)**
+    """
+    updateSocialPolling(input: UpdateSocialConfigInput!): UpdateSocialConfigPayload!
+    "Update intercom spess proceeding intercom uuid."
+    updateSpessProceedingStatus(input: UpdateSpessProceedingStatusInput!): UpdateSpessProceedingStatusPayload!
+}
+
+"Intercom network config."
+type NetworkConfig {
+    "Intercom DNS."
+    dns: IP
+    "Intercom gateway."
+    gateway: IP
+    "Intercom static IP."
+    ip: IP
+    "Intercom Mac address."
+    mac: MAC
+    "Intercom max port."
+    maxPort: Port
+    "Intercom min port."
+    minPort: Port
+    "Intercom network mode: DHCP or Static."
+    mode: NetworkMode
+    "Intercom subnet."
+    subnet: IP
+}
+
+"Flat analog settings config."
+type NewAnalogSettings {
+    "Flat redirect to line."
+    alias: Int!
+    "Flat analog blocked status."
+    blocked: Boolean!
+    "Flat analog call threshold."
+    thresholdCall: Float!
+    "Flat analog door threshold."
+    thresholdDoor: Float!
+}
+
+"Represents Flat config."
+type NewFlat {
+    "Flat analog settings."
+    analogSettings: NewAnalogSettings!
+    blocked: Boolean! @deprecated(reason: "blocked is deprecated. Use redirectionBool or analogSettings.Blocked instead.")
+    "Flat number."
+    num: Int!
+    redirection: RedirectionStatus! @deprecated(reason: "redirection is deprecated. Use redirectionBool instead.")
+    "Flat sip redirection status."
+    redirectionBool: Boolean!
+    "Flat sip account contact."
+    sipAccountContact: String
+    "Flat sound volume."
+    soundVol: Percent!
+}
+
+"Flats connection."
+type NewFlatsConnection {
+    "Flats edges."
+    edges: [NewFlatsEdge!]
+    "Page info."
+    pageInfo: PageInfo!
+    "Total count of flats."
+    totalCount: Int!
+}
+
+"Flats edge."
+type NewFlatsEdge {
+    "Cursor (need fot pagination)."
+    cursor: ID!
+    "Flat."
+    node: NewFlat
+}
+
+"Represents a open door mutation payload."
+type OpenDoorPayload {
+    "The emergency code for opening the door if intercom offline."
+    emergencyCode: String
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Optional button credentials."
+type OptionalButtonConfig {
+    "Optional button SIP redirection config."
+    redirection: RedirectionConfig
+    "SIP call uri settings."
+    sipCallUri: String
+    "SIP login."
+    sipLogin: String
+    "SIP password."
+    sipPassword: String
+    "SIP server."
+    sipServer: String
+    "SIP username."
+    sipUsername: String
+    "Use main SIP credentials?"
+    useMainSipCreds: Boolean
+}
+
+"Deprecated: Will remove in future"
+type PageInfo {
+    nextPage: [BleKeysConnection!]!
+    previousPage: [BleKeysConnection!]!
+}
+
+"Info about server URL."
+type PlatformEndpoints {
+    "Server URL for file service."
+    bootURI: URL
+    "Server URL for config service."
+    configURL: URL
+    "Server URL for file service."
+    soundsURL: URL
+    "Server URL for RTC service."
+    websocketURL: URL
+}
+
+"Represents a Policy struct."
+type Policy {
+    "Policy resource info."
+    resource: String!
+    "Policy subject info."
+    subject: String!
+}
+
+"Represents a policy mutation payload."
+type PolicyPayload {
+    "Notice message"
+    notice: String
+    "The policies that were created for this token."
+    policies: [Policy]!
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+type Query {
+    "This query is used to get Camera filter by 'CameraFilter'."
+    camera(input: CameraFilter!): CameraV2!
+    "Get camera logs (logs from cameras server)."
+    cameraLogs(input: LogsInput!): [Logs!]!
+    "Get digital keys in csv format; url link for download file."
+    getDigitalKeysCSV(input: IntercomFilter!): URL
+    "Get intercom keys in csv format; url link for download file."
+    getIntercomKeysCSV(input: IntercomFilter!): URL
+    "Deprecated: Will remove in future"
+    getNodeIDByMBID(motherBoardID: MotherboardID!): NodeID! @deprecated(reason: "Will be removed in the future")
+    "Deprecated: Will remove in future"
+    getNodeIDFromUUID(nodeType: NodeType! = INTERCOM, uuid: UUID!): NodeID! @deprecated(reason: "Will be removed in the future")
+    "Simple health check for the server."
+    healthCheck: Boolean!
+    "This query is used to get Intercom filter by 'IntercomFilter'."
+    intercom(input: IntercomFilter!): IntercomV2!
+    "Get intercom logs."
+    intercomLogs(input: LogsInput): [Logs!]!
+    "Get all Intercoms by limit and offset."
+    intercoms(limit: Int = 10, offset: Int = 0): ListOutput!
+    "Deprecated: Will remove in future"
+    nodes(nodeIDs: [NodeID!]!): [Node!]! @deprecated(reason: "Will be removed in the future")
+    "This query is used to get the list of all the policies of token by 'tokenUUID'."
+    policies(tokenUUID: UUID!): [Policy]!
+    "Search Intercoms by search string (min 3 character)."
+    search(limit: Int = 10, offset: Int = 0, search: String!): ListOutput!
+    "This query is used to get the list of all the token in the system filter by 'tokenUserID' or 'tokenUUID'."
+    tokens(filter: TokenFilterInput): [Token]!
+    "Get user logs (logging user actions)."
+    userLogs(input: LogsInput!): [UserLogs!]!
+    "Query Webhooks returns a list of all webhooks of the company in base of the token that was used to make the request."
+    webhooks: [Webhook]!
+}
+
+"Represents a reboot camera mutation payload."
+type RebootCameraPayload {
+    "Camera."
+    camera: CameraV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a reboot cluster mutation payload."
+type RebootClusterPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a reboot intercom mutation payload."
+type RebootIntercomPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Optional button SIP redirection config."
+type RedirectionConfig {
+    "Optional button SIP redirection to flat (number)."
+    flat: Int
+    "Optional button SIP redirection status."
+    redirect: Boolean!
+}
+
+"Represents a remove intercom from cluster mutation payload."
+type RemoveIntercomFromClusterPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Deprecated: Will remove in future"
+type ResetInfoOutput implements MutationResult {
+    errors: [UserError!]
+    node: Node!
+    notice: String
+    success: Boolean!
+}
+
+"Represents a restore default camera config mutation type payload."
+type RestoreDefaultCameraConfigPayload {
+    "Camera."
+    camera: CameraV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a restore default intercom config mutation type payload."
+type RestoreDefaultIntercomConfigPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Secure keys config."
+type SecureKeysConfig {
+    "A Key for SL1."
+    aKey: String
+    "AES key for SL3."
+    aesKey: String
+    "B Key for SL1."
+    bKey: String
+    "Block number for SL1/SL3."
+    blockNumber: Int
+    "Sector number for SL1/SL3."
+    sectorNumber: Int
+    "Secure keys mode."
+    secureKeysMode: SecureKeysMode!
+}
+
+"Deprecated: Will remove in future"
+type SecuredKeysConfig {
+    aesKey: String
+    blockNumber: Int
+    sectorNumber: Int
+    securedKeysMode: Boolean!
+}
+
+"Represents a server stream info struct."
+type ServerStreamInfo {
+    "Embed url."
+    serverEmbedURL: String
+    "Stream url."
+    serverStreamURL: String
+    "Thumbnails url."
+    serverThumbnailsURL: String
+    "Video thumbnails url."
+    serverVideoThumbnailsURL: String
+}
+
+"SIP credentials config."
+type SipAccountConfig {
+    "SIP call password."
+    callPassword: String
+    "SIP dfmt open door settings."
+    dtmfOpenDoor: String
+    "SIP incoming call status."
+    incomingCall: Boolean!
+    "SIP login."
+    login: String
+    "SIP password."
+    password: String
+    "SIP permanent connection status."
+    permanentSipConnection: Boolean!
+    "SIP server."
+    server: String
+    "SIP username."
+    username: String
+    "SIP config version. Used for diff between `config` and `shadow`."
+    version: String
+}
+
+"Sound volume config."
+type SoundConfig {
+    "General sound volume."
+    general: Percent!
+    "Microphone sensitivity."
+    speakHandsetTx: Percent!
+    "Intercom speaker sensitivity"
+    speakLoudspeaker: Percent!
+    "SIP volume."
+    speakSIP: Percent
+    "Sound config version. Used for diff between `config` and `shadow`."
+    version: String
+}
+
+"Standard sounds list."
+type StandardSounds {
+    "`Trill` Call to the apartment (5 sec.)"
+    HandsetCall: URI!
+    "Adding a key"
+    addKey: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button0Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button1Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button2Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button3Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button4Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button5Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button6Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button7Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button8Press: URI!
+    "Dialer keypad tones (0.5 sec)"
+    button9Press: URI!
+    "Reset keyboard tones (0.5 sec)"
+    buttonXPress: URI!
+    "Emergency yard warning system"
+    emergency: URI!
+    "`Exit` Opening the door from the entrance from the inside (5sec)"
+    exit: URI!
+    "Call at 112(5 sec)"
+    externalButtonPress: URI!
+    "`Guest` When a guest enters the door (10 sec)"
+    guestPass: URI!
+    "The key is not correct, non-existent number, the apartment is blocked (5 sec)"
+    invalidKey: URI!
+    "Key added"
+    keyAdded: URI!
+    "`Entrance` Opening the door to the entrance by the key. Normal trill (5 sec)"
+    keyPass: URI!
+    "`Poll` (10 sec)"
+    polling: URI!
+    "Standard sounds version. Used for diff between `config` and `shadow`."
+    version: String
+}
+
+"""
+
+Represents a stream info struct.
+
+Deprecated: Will remove in future
+"""
+type StreamInfo {
+    "Embed url."
+    embedURL: String
+    "Stream url."
+    streamURL: String
+    "Thumbnails url."
+    thumbnailsURL: String
+}
+
+"Represents toggleIPMode mutation payload."
+type ToggleIPModePayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a Token struct."
+type Token {
+    "Token creation date."
+    createAt: DateTime!
+    "Token description."
+    description: String
+    "Token expiration date."
+    expireAt: DateTime
+    "Token jwt value."
+    jwtToken: String!
+    "Token uuid (unique identifier)."
+    tokenUUID: UUID
+    "Token last update date."
+    updateAt: DateTime!
+}
+
+"Represents a token mutation payload"
+type TokenPayload {
+    "Notice message"
+    notice: String
+    "The policies that were created for this token"
+    policies: [Policy]!
+    "Did the operation succeed?"
+    success: Boolean!
+    "The token that was created, refreshed"
+    token: Token!
+}
+
+"Represents update camera config mutations payload."
+type UpdateCameraConfigPayload {
+    "Camera."
+    camera: CameraV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a update firmware mutation payload."
+type UpdateFirmwarePayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a update Intercom activation status mutation payload."
+type UpdateIntercomActivationStatusPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message"
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents update intercom config mutations payload."
+type UpdateIntercomConfigPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents the output of the update intercom standard sounds mutation."
+type UpdateIntercomStandardSoundsPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents a update platform endpoints payload."
+type UpdatePlatformEndpointsPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents update intercom social config mutations payload."
+type UpdateSocialConfigPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Represents update intercom spess proceeding mutation payload."
+type UpdateSpessProceedingStatusPayload {
+    "Intercom."
+    intercom: IntercomV2!
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+}
+
+"Deprecated: Will remove in future"
+type UserError {
+    code: Int!
+    message: String!
+    subcode: Int!
+}
+
+"Users actions logs"
+type UserLogs {
+    "What user send to server. "
+    changes: DataLogs
+    "DateTime in milliseconds: example `2006-01-02T15:04:05.99-07:00`."
+    dateTime: DateTimeMillisecond
+    "Intercom uuid: example `00000000-0000-0000-0000-000000000000`."
+    deviceID: UUID
+    "User token info."
+    tokenInfo: DataLogs
+    "Request URL."
+    url: String
+}
+
+"Social informing/polling settings - start/end time and sounds url."
+type UserSoundsBoundaries {
+    "Social informing/polling end time."
+    end: UnixTime
+    "Social informing/polling start time."
+    start: UnixTime
+    "Social informing/polling sounds url."
+    url: URL
+    "Social informing/polling version. Used for diff between `config` and `shadow`."
+    version: String
+}
+
+"Output type for Webhook info"
+type Webhook {
+    "Body of the request."
+    body: String
+    "Name of the cluster from which the webhook will be executed."
+    cluster: Cluster!
+    "Created at."
+    createdAT: DateTime!
+    "List of intercom UUIDs on events from which the webhook will be triggered."
+    deviceIDS: [String!]!
+    "Event on which the webhook will be triggered. Use '*' for all events."
+    event: String
+    "Headers which will be used to make the request."
+    headers: Headers
+    "JSON of fields that may occur in the event.data. Filter by specific values in event.data."
+    match: String
+    "HTTP method which will be used to make the request."
+    method: MethodHTTP!
+    "Updated at."
+    updatedAT: DateTime!
+    "URL on which the request will be made."
+    url: URL!
+    "Webhook UUID."
+    uuid: UUID!
+}
+
+"Represents a webhook output."
+type WebhookPayload {
+    "Notice message."
+    notice: String
+    "Did the operation succeed?"
+    success: Boolean!
+    "Array of webhooks."
+    webhook: Webhook
+}
+
+"Deprecated: Will remove in future"
+enum ActivationStatus {
+    NO
+    YES
+}
+
+"The `Cluster` enum."
+enum Cluster {
+    INSIT
+    SPUTNIK
+}
+
+"The `CollectingKeyStatus` enum."
+enum CollectingKeyStatus {
+    "The collecting key is off."
+    OFF
+    "The collecting key is on in usual mode."
+    ON_GENERAL
+    "The collecting key is on in flat mode."
+    ON_WITH_FLATS
+}
+
+"The `CommutatorType` enum."
+enum CommutatorType {
+    BEWARD
+    CYFRAL
+    DAXIS
+    ELTIS
+    METACOM
+    VIZIT
+}
+
+"The `DeviceName` enum."
+enum DeviceName {
+    SPUTNIK_IO
+    SPUTNIK_IO_22
+    SPUTNIK_ODIN
+    UNDEFINED
+}
+
+"The Flats filter enum."
+enum FlatsFilter {
+    "All flats (common and virtual)."
+    ALL
+    "Only common flats."
+    COMMON
+    "Only virtual flats."
+    VIRTUAL
+}
+
+"The `IntercomType` enum."
+enum IntercomType {
+    ENTRANCE
+    GATE
+}
+
+"Deprecated: Will remove in future"
+enum IsOnlineStatus {
+    NO
+    YES
+}
+
+"Deprecated: Will remove in future"
+enum IsSipRegStatus {
+    NO
+    YES
+}
+
+"The `Level` enum is used to define the access level of the function in @accessLevel directive."
+enum Level {
+    PRIVATE
+}
+
+"The `MethodHTTP` enum."
+enum MethodHTTP {
+    DELETE
+    GET
+    PATCH
+    POST
+    PUT
+}
+
+"The `NetworkMode` enum."
+enum NetworkMode {
+    DHCP
+    STATIC
+}
+
+enum NodeType {
+    CAMERA
+    INTERCOM
+}
+
+"Deprecated: Will remove in future"
+enum RedirectionStatus {
+    NO
+    YES
+}
+
+"The `SecureKeysMode` enum."
+enum SecureKeysMode {
+    "Default mode. The secret keys are not used."
+    COMMON
+    "The secret keys are used in SL1 mode."
+    SL1
+    "The secret keys are used in SL3 mode."
+    SL3
+}
+
+"Deprecated: Will remove in future"
+enum Status {
+    OFF
+    ON
+}
+
+"The `StreamType` enum."
+enum StreamType {
+    MAIN
+    SUB
+}
+
+"""
+
+Represents a camera agent serial scalar.
+
+Example: `EF00000000AAAAAA`
+"""
+scalar AgentSerial
+
+"Represents a binary string type."
+scalar Binary
+
+"""
+
+Represents a ble key scalar, String.
+
+Example: `5143c8e7659b9868`
+"""
+scalar BleKey
+
+"Represents a log (json)."
+scalar DataLogs
+
+"""
+
+Represents a DateTime scalar.
+
+Example: `2006-01-02T15:04:05Z`
+"""
+scalar DateTime
+
+"""
+
+Represents a DateTime with millisecond scalar.
+
+Example: `2006-01-02T15:04:05.99-07:00`
+"""
+scalar DateTimeMillisecond
+
+"""
+
+Represents a digital key scalar.
+
+Example: `0555`
+"""
+scalar DigitalKeyValue
+
+"""
+
+Represents a engineer key scalar, String.
+
+Deprecated: will be removed in future
+"""
+scalar EngineerKey
+
+"Represents a Webhook Headers."
+scalar Headers
+
+"""
+
+Represents a IP scalar.
+
+Example: `192.162.1.1`
+"""
+scalar IP
+
+"Represents a standard json type."
+scalar JSON
+
+"""
+
+Represents a intercom key scalar, String.
+
+Example: `b7c7aea4`
+"""
+scalar Key
+
+"""
+
+Represents a MAC scalar.
+
+Example: `00:6B:00:00:00:20`
+"""
+scalar MAC
+
+"""
+
+Represents a millisecond scalar.
+
+Example: `30000`
+"""
+scalar Millisecond
+
+"""
+
+Represents a motherboardID of Intercom, Int.
+
+Example: `1809100104`
+"""
+scalar MotherboardID
+
+"Deprecated: will be removed in future"
+scalar NodeID
+
+"Deprecated: will be removed in the next major version"
+scalar PIN
+
+"""
+
+Represents a password scalar.
+
+Example: `some-string`
+"""
+scalar Password
+
+"""
+
+Represents a percent scalar.
+
+Example: `0` or `100`
+"""
+scalar Percent
+
+"Represents a Uint16 scalar"
+scalar Port
+
+"""
+
+Camera salt.
+
+Example: `ee9a0f57`
+"""
+scalar Salt
+
+"""
+
+Represents a second scalar.
+
+Example: `10`
+"""
+scalar Second
+
+"""
+
+Represents a Intercom short serial scalar.
+
+Example: `A000AA`
+
+Deprecated: will be removed in future
+"""
+scalar SerialNumber
+
+"""
+
+Represents a URI scalar, path for sounds and firmwares.
+
+Example: `/some-folder/some-file.bin`
+"""
+scalar URI
+
+"""
+
+Represents a URL scalar.
+
+Example: `https://www.google.com`
+"""
+scalar URL
+
+"""
+
+Represents a UUID scalar.
+
+Example: `00000000-0000-0000-0000-000000000000`
+"""
+scalar UUID
+
+"Represents a standard uint type."
+scalar Uint
+
+"""
+
+Represents a unix time scalar.
+
+Example: `1689764940`
+"""
+scalar UnixTime
+
+"Represents a Upload (GraphQL type for uploading files) scalar."
+scalar Upload
+
+"""
+
+Represents a firmware version scalar, Float.
+
+Example: `6.40`
+"""
+scalar Version
+
+"Represents a add ble keys input."
+input AddBleKeysInput {
+    "Ble keys."
+    bleKeys: [BleKey]!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents an add intercom to prefix cluster mutation."
+input AddClusterPrefixesToIntercomInput {
+    "Cluster prefixes."
+    clusterPrefixes: [ClusterPrefixInput!]!
+    "Gate intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents add intercom keys batch input."
+input AddIntercomKeysBatchInput {
+    "Intercom uuid (unique identifier)."
+    intercomIDs: [UUID!]!
+    "Intercom keys."
+    keys: [IntercomKey]!
+}
+
+"Represents add intercom keys input."
+input AddIntercomKeysInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Intercom keys."
+    keys: [IntercomKey]!
+}
+
+"Represents an add intercom to cluster mutation."
+input AddIntercomToClusterInput {
+    "Gate intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Entrances intercom data."
+    subIntercoms: [AddIntercomToClusterSubIntercomsInput!]!
+}
+
+"Represents a sub intercom data for an add intercom to cluster mutation."
+input AddIntercomToClusterSubIntercomsInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "SpeechKit voice text."
+    voiceText: String!
+}
+
+"Represents a filter for searching Camera."
+input CameraFilter {
+    "Serial of Camera."
+    agentSerial: AgentSerial
+    "Camera uuid (unique identifier)."
+    cameraID: UUID
+    "Camera uuid (unique identifier)."
+    uuid: UUID
+}
+
+"Represents a cluster prefix data for an add intercom to prefix cluster mutation."
+input ClusterPrefixInput {
+    "First flat."
+    firstFlat: Int!
+    "Last flat."
+    lastFlat: Int!
+    "Cluster prefix."
+    prefix: Int!
+    "Voice text."
+    voiceText: String!
+}
+
+"Represents create camera mutation input."
+input CreateCameraInput {
+    "Camera agent id."
+    agentID: String!
+    "Camera agent key."
+    agentKey: String!
+    "Camera agent model."
+    agentModel: String!
+    "Camera name."
+    agentSerial: AgentSerial!
+    "Camera onvif profile."
+    onvifProfile: String!
+    "Camera onvif url/."
+    onvifURL: String!
+    "Camera stream url."
+    streamURL: String!
+    "Camera substream url."
+    substreamURL: String!
+    "Camera thumbnail url."
+    thumbnailsURL: String!
+}
+
+"Represents an create camera user mutation."
+input CreateCameraUserInput {
+    access: Int!
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    password: String!
+    username: String!
+}
+
+"Represents create custom camera mutation input."
+input CreateCustomCameraInput {
+    "Camera name."
+    cameraName: String!
+    "Camera company uuid."
+    companyUUID: UUID!
+    "Camera stream url."
+    streamURL: String!
+}
+
+"Represents a create digital key input."
+input CreateDigitalKeysInput {
+    "Digital keys."
+    digitalKeys: [DigitalKeyInput]!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a create genesis token mutation input."
+input CreateGenesisTokenInput {
+    "Company uuid (unique identifier) for this token."
+    companyID: UUID!
+    "Description of the token"
+    description: String!
+    "Token expiration lifetime in days"
+    lifeTime: Uint
+}
+
+"Represents an create intercom input."
+input CreateIntercomInput {
+    "The Intercoms Camera serial"
+    agentSerial: AgentSerial
+    "The intercom serial (motherboardID)."
+    motherboardID: MotherboardID!
+}
+
+"Represents a policy struct for create token policy mutation."
+input CreatePolicyInput {
+    "Policy resource info."
+    resource: String!
+}
+
+"Represents a create token mutation input."
+input CreateTokenInput {
+    "Description of the token"
+    description: String
+    "Token expiration lifetime in days"
+    lifeTime: Uint
+}
+
+"Represents a create token policy mutation input."
+input CreateTokenPolicyInput {
+    "Token policy."
+    policy: [CreatePolicyInput]!
+    "Token uuid (unique identifier)."
+    tokenUUID: UUID!
+}
+
+"Represents a create webhook input."
+input CreateWebhookInput {
+    "Body to set in request body."
+    body: String
+    "Cluster name in which the webhook will be processed. By default set to 'sputnik'."
+    cluster: Cluster
+    "Array of triggered devices."
+    deviceIDS: [String]
+    "Event name."
+    event: String!
+    "Headers to set in request header."
+    headers: Headers
+    "Method name (default use POST)."
+    method: MethodHTTP = POST
+    "URL to send webhooks."
+    url: String!
+}
+
+"Represents a delete all ble keys input."
+input DeleteAllBleKeysInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a delete all digital keys input."
+input DeleteAllDigitalKeysInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents delete all intercom keys input."
+input DeleteAllIntercomKeysInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a delete ble keys input."
+input DeleteBleKeysInput {
+    "Ble keys."
+    bleKeys: [BleKey]!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents an delete camera user mutation."
+input DeleteCameraUserInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    username: String!
+}
+
+"Represents a delete digital key input."
+input DeleteDigitalKeyInput {
+    "Digital key uuid (unique identifier)."
+    digitalKeyUUID: UUID!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a delete intercom backup mutation."
+input DeleteIntercomBackupInput {
+    "Backup id (unique identifier)."
+    backupID: String!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents delete intercom keys batch input."
+input DeleteIntercomKeysBatchInput {
+    "Intercom uuid (unique identifier)."
+    intercomIDs: [UUID!]!
+    "Keys."
+    keys: [Key!]!
+}
+
+"Represents delete intercom keys input."
+input DeleteIntercomKeysInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Keys."
+    keys: [Key!]!
+}
+
+"Represents a delete token policy mutation input."
+input DeletePoliciesInput {
+    "The policies that will delete for this token."
+    policies: [DeletePolicyInput!]!
+    "Token uuid (unique identifier)."
+    tokenUUID: UUID!
+}
+
+"Represents a policy struct for delete token policy mutation."
+input DeletePolicyInput {
+    "Policy resource info."
+    resource: String!
+    "Policy subject info."
+    subject: String!
+}
+
+"Represents a delete token mutation input."
+input DeleteTokenInput {
+    "Token uuid (unique identifier)."
+    tokenUUID: UUID!
+}
+
+"Represents a delete webhook input."
+input DeleteWebhookInput {
+    "Webhook uuid (unique identifier)."
+    uuid: UUID!
+}
+
+"Represents a digital key input."
+input DigitalKeyInput {
+    "Description of the digital key."
+    description: String
+    "Digital key uuid (unique identifier)."
+    digitalKeyUUID: UUID
+    "Digital key lifetime."
+    expTime: DateTime
+    "Digital key value."
+    value: DigitalKeyValue
+}
+
+"Represents a edit webhook input."
+input EditWebhookInput {
+    "Body to set in request body."
+    body: String
+    "Cluster name in which the webhook will be processed"
+    cluster: Cluster
+    "Array of triggered devices."
+    deviceIDS: [String]
+    "Event name."
+    event: String
+    "Headers to set in request header."
+    headers: Headers
+    "Method name."
+    method: MethodHTTP
+    "URL to send webhooks."
+    url: String
+    "Webhook uuid (unique identifier)."
+    uuid: UUID!
+}
+
+"Represents an emergency mutation input."
+input EmergencyInput {
+    "Emergency ID"
+    emergencyID: Int!
+    "Intercom filter."
+    intercom: IntercomFilter!
+    "Duration of open door in seconds."
+    openDoorDuration: Uint
+    "Number of sound cycles"
+    soundDuration: Uint
+}
+
+"Represents a flats analog settings."
+input FlatAnalogSettingsInput {
+    "Alias param."
+    alias: Int
+    "Blocked param."
+    blocked: Boolean
+    "Flat thresholdCall param."
+    thresholdCall: Float
+    "Flat thresholdDoor param."
+    thresholdDoor: Float
+}
+
+"Represents a flat input list for update intercom flats config."
+input FlatConfigInput {
+    "Num of flat."
+    flatNum: Uint!
+    "Parameters list  for flat."
+    parameters: FlatParametersInput!
+}
+
+"Represents a intercom flat num input."
+input FlatNumberInput {
+    "Intercom Filter."
+    intercom: IntercomFilter!
+    "Flat number."
+    num: Uint!
+}
+
+"Represents a flats parameters list for update intercom flats config."
+input FlatParametersInput {
+    "Flat analog setting list."
+    analogSettings: FlatAnalogSettingsInput
+    "Flat blocked param: true/false."
+    blocked: Boolean
+    "Flat redirection param: true/false."
+    redirection: Boolean
+    "Flat sip account param."
+    sipAccountContact: String
+    "Sounds volume for flat: 0-100."
+    soundVol: Percent
+}
+
+"Represents a filter for searching Intercom."
+input IntercomFilter {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID
+    "Short serial number of Intercom."
+    motherboardID: MotherboardID
+    "Intercom uuid (unique identifier)."
+    uuid: UUID
+}
+
+"Represents a update intercom flats config mutation input."
+input IntercomFlatInput {
+    "Flat info."
+    flat: FlatConfigInput!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a update intercom flats config mutation input."
+input IntercomFlatsInput {
+    "Flats list."
+    flats: [FlatConfigInput!]
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents intercom key input."
+input IntercomKey {
+    "Description of keys."
+    Description: String
+    "Key."
+    Key: Key
+}
+
+"Represents a line adc value."
+input LineADCValue {
+    "Line one."
+    one: Int
+    "Line three."
+    three: Int
+    "Line two."
+    two: Int
+}
+
+"Represents a line test mutation input."
+input LineTestInput {
+    "Flat for line testing."
+    flatNum: Int!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a link intercom to company mutation."
+input LinkCameraToCompanyInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    "Company uuid (unique identifier)."
+    companyID: UUID!
+}
+
+"Represents a link camera to intercom mutation."
+input LinkCameraToIntercomInput {
+    "Camera agent serial."
+    cameraAgentSerial: AgentSerial!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a link intercom to company mutation."
+input LinkIntercomToCompanyInput {
+    "Company uuid (unique identifier)."
+    companyID: UUID!
+    "Intercom motherboard id."
+    intercom: IntercomFilter
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID
+}
+
+"Represents logs input for getting intercomLogs, userLogs and cameraLogs."
+input LogsInput {
+    "Device ID (intercomID, cameraID)."
+    deviceID: UUID!
+    "Filters for logs."
+    filters: String
+    "Limit of logs."
+    limit: Int
+    "Offset of logs."
+    offset: Int
+}
+
+"Represents an intercom network config parameters."
+input NetworkConfigInput {
+    "Dns server ip."
+    dns: IP
+    "Gateway address."
+    gateway: IP
+    "Ip address."
+    ip: IP
+    "Mac address."
+    mac: MAC
+    "Max port"
+    maxPort: Port
+    "Min port"
+    minPort: Port
+    "Subnet."
+    subnet: IP
+}
+
+"Represents a open door mutation."
+input OpenDoorInput {
+    "Duration of open door in seconds."
+    duration: Uint
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents an optional button parameters."
+input OptionalButtonInput {
+    "Redirection parameters."
+    redirection: OptionalButtonRedirectionInput
+    "Sip call uri."
+    sipCallUri: String
+    "Alternative sip client login."
+    sipLogin: String
+    "Alternative sip client password."
+    sipPassword: String
+    "Alternative sip client server."
+    sipServer: String
+    "Alternative sip client username."
+    sipUsername: String
+    "Use main sip credentials?"
+    useMainSipCreds: Boolean
+}
+
+"Represents an optional button redirection parameters."
+input OptionalButtonRedirectionInput {
+    "Flat to redirect."
+    flat: Int = 999
+    "Need redirection?"
+    redirect: Boolean
+}
+
+"Represents plug camera archive mutation input."
+input PlugCameraArchiveInput {
+    "Camera filter: cameraID or agentSerial(cameraName)."
+    cameraFilter: CameraFilter!
+    "Camera archive duration in days."
+    dvrDepth: Int!
+}
+
+"Represents a reboot camera mutation input."
+input RebootCameraInput {
+    "Camera uuid (unique identifier)."
+    cameraID: UUID!
+}
+
+"Represents a reboot cluster mutation input."
+input RebootClusterInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a reboot intercom mutation input."
+input RebootIntercomInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a refresh token mutation input."
+input RefreshTokenInput {
+    "Token expiration lifetime in days"
+    lifeTime: Uint
+    "Token uuid (unique identifier)."
+    tokenUUID: UUID!
+}
+
+"Represents a remove intercom from prefix cluster mutation."
+input RemoveClusterPrefixInput {
+    "Gate intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Entrances intercom data."
+    prefix: Int!
+}
+
+"Represents a remove intercom from cluster mutation."
+input RemoveIntercomFromClusterInput {
+    "Gate intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Entrances intercom data."
+    subIntercoms: [RemoveIntercomFromClusterSubIntercomsInput!]!
+}
+
+"Represents a sub intercom data for a remove intercom from cluster mutation."
+input RemoveIntercomFromClusterSubIntercomsInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a restore config mutation input."
+input RestoreConfigInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a restore default intercom config mutation filter."
+input RestoreDefaultIntercomConfigFilter {
+    "If true, mutation restore intercom network config to default params."
+    needRestoreDefaultNetworkConfig: Boolean = true
+}
+
+"Represents a restore default intercom config mutation input."
+input RestoreDefaultIntercomConfigInput {
+    "Filter."
+    filter: RestoreDefaultIntercomConfigFilter
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a restore intercom backup mutation."
+input RestoreIntercomBackupInput {
+    "Backup id (unique identifier)."
+    backupID: String!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a save intercom backup mutation."
+input SaveIntercomBackupInput {
+    "Backup description."
+    description: String
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents server stream info input."
+input ServerStreamInfoInput {
+    "Embed url."
+    serverEmbedURL: String
+    "Stream url."
+    serverStreamURL: String
+    "Thumbnails url."
+    serverThumbnailsURL: String
+}
+
+"Represents a sip parameters."
+input SipParametersInput {
+    "Incoming call password."
+    callPassword: String
+    "Dtmf code for open door via sip."
+    dtmfOpenDoor: String
+    "Is SIP Blocked on intercom?"
+    generalSipBlocked: Boolean
+    "Should intercom receive incoming calls?"
+    incomingCall: Boolean
+    "Sip client login."
+    login: String
+    "Sip client password."
+    password: String
+    "Is permanent sip conn necessary?"
+    permanentSipConnection: Boolean
+    "Sip server url."
+    server: String
+    "Sip client username."
+    username: String
+}
+
+"Represents the standard sounds input."
+input StandardSoundsInput {
+    "Add key sound."
+    addKey: Upload
+    "Button '0' press sound."
+    button0Press: Upload
+    "Button '1' press sound."
+    button1Press: Upload
+    "Button '2' press sound."
+    button2Press: Upload
+    "Button '3' press sound."
+    button3Press: Upload
+    "Button '4' press sound."
+    button4Press: Upload
+    "Button '5' press sound."
+    button5Press: Upload
+    "Button '6' press sound."
+    button6Press: Upload
+    "Button '7' press sound."
+    button7Press: Upload
+    "Button '8' press sound."
+    button8Press: Upload
+    "Button '9' press sound."
+    button9Press: Upload
+    "Button '*' press sound."
+    buttonXPress: Upload
+    "Emergency sound."
+    emergency: Upload
+    "Exit sound."
+    exit: Upload
+    "External button press sound."
+    externalButtonPress: Upload
+    "Guest pass sound."
+    guestPass: Upload
+    "Handset call sound."
+    handsetCall: Upload
+    "Invalid key sound."
+    invalidKey: Upload
+    "Key added sound."
+    keyAdded: Upload
+    "Key pass sound."
+    keyPass: Upload
+    "Social polling sound."
+    polling: Upload
+}
+
+"Represents a start call mutation."
+input StartCallInput {
+    "Flat number."
+    flatNum: Uint!
+    "Intercom uuid (unique identifier)."
+    intercom: IntercomFilter!
+}
+
+"Represents a token filter struct."
+input TokenFilterInput {
+    "Token UUID"
+    tokenUUID: UUID
+    "User ID of the token"
+    tokenUserID: Int
+}
+
+"Represents an update camera audio config mutation."
+input UpdateCameraAudioConfigInput {
+    amplifier: Boolean
+    bitrate: Int
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    encodeType: String
+    inputVolume: Int
+    outputVolume: Int
+    sampleRate: Int
+    status: Boolean
+}
+
+"Represents an update camera image config mutation."
+input UpdateCameraImageConfigInput {
+    blc: Int
+    brightness: Int
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    contrast: Int
+    hlc: Int
+    nr2d: Int
+    nr3d: Int
+    powerFreq: Int
+    saturation: Int
+    sharpness: Int
+    wdrEnabled: Boolean
+    wdrLevel: Int
+}
+
+"Represents update camera mutation input."
+input UpdateCameraInput {
+    "Activation status, enable/disable on media server."
+    activationStatus: Boolean
+    "Camera filter: cameraID or agentSerial(cameraName)."
+    cameraFilter: CameraFilter!
+    "Camera archive duration in days."
+    dvrDepth: Int
+    "Camera permanent stream parameter."
+    permanentStream: Boolean
+    "Server stream info for camera."
+    serverStreamInfo: ServerStreamInfoInput
+    "Camera video only parameter; enable/disable sound on video stream."
+    videoOnly: Boolean
+}
+
+"Represents an update camera ircut config mutation."
+input UpdateCameraIrcutConfigInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    ledBrightness: Int
+    lightSensitivity: Int
+}
+
+"Represents an update camera motion detect config mutation."
+input UpdateCameraMotionDetectConfigInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    enabled: Boolean
+    enabledHook: Boolean
+    sensitivity: Int
+}
+
+"Represents an update camera network config mutation."
+input UpdateCameraNetworkConfigInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    dhcp: Boolean
+    gateway: IP
+    ip: IP
+    netmask: IP
+    primaryDns: IP
+    secondDns: IP
+}
+
+"Represents an update camera ntp config."
+input UpdateCameraNtpConfigInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    ntpPort: Int
+    ntpServer: String
+    timezone: String
+    updatePeriod: Int
+}
+
+"Represents an update camera osd config mutation."
+input UpdateCameraOsdConfigInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    osdDownLeft: String
+    osdUpLeft: String
+    osdUpRight: String
+    showWeek: Boolean
+}
+
+"Represents an update camera snapshot config mutation."
+input UpdateCameraSnapshotsConfigInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    quality: Int
+    status: Boolean
+}
+
+"Represents an update camera video config mutation."
+input UpdateCameraVideoConfigInput {
+    bitrate: Int
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    codec: String
+    compression: String
+    fps: Int
+    frameInterval: Int
+    rateType: String
+    resolution: String
+    status: Boolean
+    "Stream type: MAIN or SUB"
+    streamType: StreamType!
+}
+
+"Represents an update prefix cluster mutation."
+input UpdateClusterPrefixInput {
+    "First flat."
+    firstFlat: Int
+    "Gate intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Last flat."
+    lastFlat: Int
+    "Entrances intercom data."
+    prefix: Int!
+    "SpeechKit voice text."
+    voiceText: String
+}
+
+"Represents a update digital key description input."
+input UpdateDigitalKeyInput {
+    "Description of the digital key."
+    description: String!
+    "Digital key uuid (unique identifier)."
+    digitalKeyUUID: UUID!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a update firmware mutation input."
+input UpdateFirmwareInput {
+    "Firmware file."
+    firmware: Upload!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents a update Intercom activation status mutation input."
+input UpdateIntercomActivationStatusInput {
+    "Intercom filter."
+    intercom: IntercomFilter!
+    "Intercom activations status"
+    status: Boolean!
+}
+
+"Represents an update intercom call config mutation."
+input UpdateIntercomCallConfigInput {
+    "Flat call time timeout in milliseconds."
+    flatCallTimeTimeout: Millisecond
+    "Flat dialing time timeout in milliseconds."
+    flatDialingTimeTimeout: Millisecond
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents an update intercom commutator config parameters."
+input UpdateIntercomCommutatorConfigInput {
+    "Commutator type."
+    commutatorType: CommutatorType
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Line adc levels parameters."
+    lineAdcLevels: LineADCValue
+}
+
+"Represents an update intercom external interface door control mutation."
+input UpdateIntercomExternalInterfaceDoorCtrlInput {
+    "External interface door control (0 or 1)."
+    externalInterfaceDoorCtrl: Int!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents an update intercom flat config mutation."
+input UpdateIntercomFlatConfigInput {
+    "Default threshold call."
+    defaultThresholdCall: Float
+    "Default threshold door."
+    defaultThresholdDoor: Float
+    "First flat number."
+    firstFlat: Uint
+    "Flat offset."
+    flatOffset: Int
+    """
+
+    **PRIVATE FIELD**
+
+    Max allowed flat range
+    """
+    flatRange: Uint
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Last flat number."
+    lastFlat: Uint
+}
+
+"Represents an update intercom interact config mutation."
+input UpdateIntercomInteractConfigInput {
+    "Collecting key status."
+    collectingKeyStatus: CollectingKeyStatus!
+    "Erase keys?"
+    eraseKeys: Boolean
+    "Turn on infrared light?"
+    infraredStatus: Boolean
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Turn on light?"
+    lightStatus: Boolean
+}
+
+"Represents update intercom key input."
+input UpdateIntercomKeyInput {
+    "Description of keys."
+    description: String!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Key."
+    key: Key!
+}
+
+"Represents an update intercom lock no nc parameters mutation."
+input UpdateIntercomLockNoNcParametersInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Lock no nc parameter (0, 1, 2, 3)."
+    lockNoNc: Int!
+}
+
+"Represents an update intercom sound config mutation."
+input UpdateIntercomNetworkConfigInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Intercom network parameters."
+    networkConfig: NetworkConfigInput!
+}
+
+"Represents an update intercom open door config mutation."
+input UpdateIntercomOpenDoorConfigInput {
+    "Duration of open door via bluetooth in seconds."
+    bluetooth: Second
+    "Emergency duration of open door in seconds."
+    emergency: Second
+    "General duration of open door in seconds."
+    general: Second
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Social duration of open door in seconds."
+    social: Second
+}
+
+"Represents an update intercom optional button mutation."
+input UpdateIntercomOptionalButtonParametersInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Optional button parameters."
+    optionalButton: OptionalButtonInput!
+}
+
+"Represents a update secure mode mutation input."
+input UpdateIntercomSecureKeysConfigInput {
+    "A KEY for SL1."
+    aKey: String
+    "AES Key for SL3."
+    aesKey: String
+    "B Key for SL1."
+    bKey: String
+    "Block number."
+    blockNumber: Int
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Sector number."
+    sectorNumber: Int
+    "Secure keys mode: COMMON, SL1, SL3."
+    secureKeysMode: SecureKeysMode!
+}
+
+"Represents an update intercom secured keys config mutation."
+input UpdateIntercomSecuredKeysConfigInput {
+    "Aes key."
+    aesKey: String
+    "Block number."
+    blockNumber: Int
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Sector number."
+    sectorNumber: Int
+    "Is secured keys mode?"
+    securedKeysMode: Boolean!
+}
+
+"Represents an update intercom sip parameters mutation."
+input UpdateIntercomSipParametersInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Sip client parameters."
+    sipParameters: SipParametersInput!
+}
+
+"Represents an update intercom sound config mutation."
+input UpdateIntercomSoundConfigInput {
+    "General volume as a percentage of the maximum."
+    general: Percent
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Microphone sensitivity as a percentage of the maximum."
+    speakHandsetTx: Percent
+    "Speaker volume as a percentage of the maximum."
+    speakLoudspeaker: Percent
+    "Sip call volume as a percentage of the maximum."
+    speakSIP: Percent
+}
+
+"Represents a update intercom sound processing config mode mutation input."
+input UpdateIntercomSoundProcessingConfigInput {
+    "Config."
+    config: JSON!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+}
+
+"Represents the input of the update intercom standard sounds mutation."
+input UpdateIntercomStandardSoundsInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Standard sounds list to update."
+    standardSoundsList: StandardSoundsInput!
+}
+
+"Represents an update intercom time zone mutation."
+input UpdateIntercomTimeZoneInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "UTC time zone (number with sign, i.e. '+3')."
+    timeZone: String!
+}
+
+"Represents a update platform endpoints mutation."
+input UpdatePlatformEndpointsInput {
+    "File service URL."
+    bootURL: URL
+    "Configuration service URL."
+    configURL: URL
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "File service URL."
+    soundsURL: URL
+    "RTC service URL."
+    websocketURL: URL
+}
+
+"Represents an update camera base config mutation."
+input UpdateServiceCameraConfigInput {
+    "Camera filter: CameraID or AgentSerial"
+    camera: CameraFilter!
+    enableWeb: Boolean
+    flussonicAgent: Boolean
+    flussonicServer: String
+    hikEnable: Boolean
+    hikPort: Int
+    onvifAuth: Boolean
+    rmqURL: String
+    rtspAuth: Boolean
+    rtspEnable: Boolean
+    rtspPort: Int
+}
+
+"Represents an update intercom social config mutation."
+input UpdateSocialConfigInput {
+    "End time of the social informing/polling."
+    end: UnixTime!
+    "File of the social informing/polling."
+    file: Upload!
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Start time of the social informing/polling."
+    start: UnixTime!
+}
+
+"Represents an update intercom spess proceeding mutation."
+input UpdateSpessProceedingStatusInput {
+    "Intercom uuid (unique identifier)."
+    intercomID: UUID!
+    "Spess proceeding status."
+    status: Boolean!
+}

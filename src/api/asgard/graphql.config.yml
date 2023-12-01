@@ -1,0 +1,8 @@
+schema: schema.graphql
+documents: '**/*.graphql'
+extensions:
+  endpoints:
+    "asgard":
+      url: "https://api.sputnik.systems/query"
+      headers:
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl91dWlkIjoiZDQyYmExMDgtODllNC00NmFlLWFjMzYtYmM1MDkzZmE5M2NmIiwiZW50aXR5X3V1aWQiOiJmMzhmZWZjNi1lZGQ2LTQ4MjItOTkyMi00MjZmOGQ0NGQ0YjAiLCJlbnRpdHlfdHlwZSI6InVzZXIiLCJlbnRpdHlfcmVmX3V1aWQiOiJiMTc4MmU0Zi05MTk4LTQ5ZDEtYjVhYS03YmRiYTljODdkMjEiLCJlbnRpdHlfbmFtZSI6ImFwaSIsInNhbHQiOiJhNDNhOTFkNSJ9.njVmEeomlscHXVlBcATDsSyzBMllKhV8OxQBTbpntfE"
